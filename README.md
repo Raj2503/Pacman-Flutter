@@ -4,13 +4,14 @@ The beloved vintage Pacman game with Flutter Animations and Sound Effects compat
 
 
 ## Project Structure: 
-The rough breakdown of the game will consist of game logic and I/O. 
-The game logic will consist of collision detection, scoring, and
-enemy AI. The I/O will include mostly interaction with the touch
-and if time forbids, maybe a keyboard/joystick to make it accessible on PCs too.
-Current state of the game is mainly implementation of the game logic and sound effects.
-Further during the timeline, the plan is to improve the frame rate and add a 
-ranking system based on highscore into the game. 
+The rough breakdown of the current state of the game will consist of 
+Game Logic, I/O and Sound Effects. The game logic consists of collision 
+detection, scoring, and Ghost AI. The I/O includes mostly interaction 
+with touch and if time forbids, maybe a keyboard/joystick to make it accessible 
+on PCs too. 
+Further during the timeline, the plan is to improve the frame rate, add a 
+ranking system based on highscore and implement shortest path 
+algorithm for Ghosts to target Pacman in the game. 
 
 
 ## Dependencies
