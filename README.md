@@ -3,7 +3,7 @@
 Vintage Pacman Game developed with the help of Flutter. 
 
 
-# Project Structure: 
+## Project Structure: 
 The rough breakdown of the game will consist of game logic and I/O. 
 The game logic will consist of collision detection, scoring, and
 enemy AI. The I/O will include mostly interaction with the touch
@@ -12,7 +12,7 @@ Current state of the game is mainly implementation of the game logic and sound e
 Further during the timeline, the plan is to improve the frame rate and add a 
 ranking system based on highscore into the game. 
 
-# Dependencies
+## Dependencies
 1. audioplayers: ^0.17.0
 2. flutter_phoenix: ^0.1.0
 
