@@ -12,9 +12,11 @@ Current state of the game is mainly implementation of the game logic and sound e
 Further during the timeline, the plan is to improve the frame rate and add a 
 ranking system based on highscore into the game. 
 
+
 ## Dependencies
 1. audioplayers: ^0.17.0
 2. flutter_phoenix: ^0.1.0
 
 
+## App Preview
 <img src="https://media.giphy.com/media/R5IwB9VhawKp8Fv4mg/giphy.gif"/>
