@@ -1,16 +1,20 @@
-# packman
+# Pacman
 
-A new Flutter project.
+Vintage Pacman Game developed with the help of Flutter. 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Project Structure: 
+The rough breakdown of the game will consist of game logic and I/O. 
+The game logic will consist of collision detection, scoring, and
+enemy AI. The I/O will include mostly interaction with the touch
+and if time forbids, maybe a keyboard/joystick to make it accessible on PCs too.
+Current state of the game is mainly implementation of the game logic and sound effects.
+Further during the timeline, the plan is to improve the frame rate and add a 
+ranking system based on highscore into the game. 
 
-A few resources to get you started if this is your first Flutter project:
+# Dependencies
+audioplayers: ^0.17.0
+flutter_phoenix: ^0.1.0
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://media.giphy.com/media/R5IwB9VhawKp8Fv4mg/giphy.gif"/>
