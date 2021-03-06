@@ -1,6 +1,6 @@
 # Pacman
 
-Vintage Pacman Game developed with the help of Flutter. 
+The beloved vintage Pacman game with Flutter Animations and Sound Effects compatible in both Andriod and IOS.
 
 
 ## Project Structure: 
