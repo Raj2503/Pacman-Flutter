@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyPath extends StatelessWidget {
+class Path extends StatelessWidget {
   final innerColor;
   final outerColor;
   final child;
 
-  MyPath({this.innerColor, this.outerColor, this.child});
+  const Path({this.innerColor, this.outerColor, this.child});
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -2,6 +2,9 @@
 
 The beloved vintage Pacman game with Flutter Animations and Sound Effects compatible in both Andriod and IOS.
 
+## License
+MIT
+
   
 ## Project Structure: 
 The rough breakdown of the current state of the game will consist of 
@@ -16,8 +19,8 @@ algorithm for Ghosts to target Pacman in the game.
 
   
 ## Dependencies
-1. audioplayers: ^0.17.0
-2. flutter_phoenix: ^0.1.0
+    flutter_phoenix: ^0.1.0
+    audioplayers: ^0.20.1
 
   
 ## App Preview

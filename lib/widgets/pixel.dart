@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MyPixel extends StatelessWidget {
+class Pixel extends StatelessWidget {
   final innerColor;
   final outerColor;
   final child;
 
-  MyPixel({this.innerColor, this.outerColor, this.child});
+  const Pixel({this.innerColor, this.outerColor, this.child});
+
   @override
   Widget build(BuildContext context) {
     return Padding(

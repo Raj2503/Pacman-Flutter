@@ -1,17 +1,10 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:packman/ghost.dart';
-import 'package:packman/ghost3.dart';
-import 'package:packman/ghost2.dart';
-import 'package:packman/path.dart';
-import 'package:packman/pixel.dart';
-import 'package:packman/player.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
+
+import '../widgets/imports.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,13 +23,13 @@ class _HomePageState extends State<HomePage> {
   var controller;
   int score = 0;
   bool paused = false;
-  AudioPlayer advancedPlayer = new AudioPlayer();
-  AudioPlayer advancedPlayer2 = new AudioPlayer();
-  AudioCache audioInGame = new AudioCache(prefix: 'assets/');
-  AudioCache audioMunch = new AudioCache(prefix: 'assets/');
-  AudioCache audioDeath = new AudioCache(prefix: 'assets/');
-  AudioCache audioPaused = new AudioCache(prefix: 'assets/');
-  List<int> barriers = [
+  AudioPlayer advancedPlayer = AudioPlayer();
+  AudioPlayer advancedPlayer2 = AudioPlayer();
+  AudioCache audioInGame = AudioCache(prefix: 'assets/');
+  AudioCache audioMunch = AudioCache(prefix: 'assets/');
+  AudioCache audioDeath = AudioCache(prefix: 'assets/');
+  AudioCache audioPaused = AudioCache(prefix: 'assets/');
+  List<int> barriers = const [
     0,
     1,
     2,
@@ -141,10 +134,10 @@ class _HomePageState extends State<HomePage> {
 
   void startGame() {
     if (preGame) {
-      advancedPlayer = new AudioPlayer();
-      audioInGame = new AudioCache(fixedPlayer: advancedPlayer);
-      audioPaused = new AudioCache(fixedPlayer: advancedPlayer2);
-      audioInGame.loop('pacman_beginning.wav');
+      advancedPlayer = AudioPlayer();
+      audioInGame = AudioCache(fixedPlayer: advancedPlayer);
+      audioPaused = AudioCache(fixedPlayer: advancedPlayer2);
+      audioInGame.loop('audio/pacman_beginning.wav');
       preGame = false;
       getFood();
 
@@ -155,7 +148,7 @@ class _HomePageState extends State<HomePage> {
         }
         if (player == ghost || player == ghost2 || player == ghost3) {
           advancedPlayer.stop();
-          audioDeath.play('pacman_death.wav');
+          audioDeath.play('audio/pacman_death.wav');
           setState(() {
             player = -1;
           });
@@ -167,9 +160,9 @@ class _HomePageState extends State<HomePage> {
                   title: Center(child: Text("Game Over!")),
                   content: Text("Your Score : " + (score).toString()),
                   actions: [
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
-                        audioInGame.loop('pacman_beginning.wav');
+                        audioInGame.loop('audio/pacman_beginning.wav');
                         setState(() {
                           player = numberInRow * 14 + 1;
                           ghost = numberInRow * 2 - 2;
@@ -185,12 +178,20 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pop(context);
                         });
                       },
-                      textColor: Colors.white,
-                      padding: const EdgeInsets.all(0.0),
+                      style: ButtonStyle(
+                        textStyle: MaterialStateProperty.all(
+                          const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.all(0.0),
+                        ),
+                      ),
                       child: Container(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
-                            colors: <Color>[
+                            colors: [
                               Color(0xFF0D47A1),
                               Color(0xFF1976D2),
                               Color(0xFF42A5F5),
@@ -218,7 +219,7 @@ class _HomePageState extends State<HomePage> {
           mouthClosed = !mouthClosed;
         });
         if (food.contains(player)) {
-          audioMunch.play('pacman_chomp.wav');
+          audioMunch.play('audio/pacman_chomp.wav');
           setState(() {
             food.remove(player);
           });
@@ -677,14 +678,17 @@ class _HomePageState extends State<HomePage> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: numberOfSquares,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: numberInRow),
+                    crossAxisCount: numberInRow,
+                  ),
                   itemBuilder: (BuildContext context, int index) {
                     if (mouthClosed && player == index) {
                       return Padding(
                         padding: EdgeInsets.all(4),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.yellow, shape: BoxShape.circle),
+                            color: Colors.yellow,
+                            shape: BoxShape.circle,
+                          ),
                         ),
                       );
                     } else if (player == index) {
@@ -692,47 +696,43 @@ class _HomePageState extends State<HomePage> {
                         case "left":
                           return Transform.rotate(
                             angle: pi,
-                            child: MyPlayer(),
+                            child: Player(),
                           );
-                          break;
                         case "right":
-                          return MyPlayer();
-                          break;
+                          return Player();
                         case "up":
                           return Transform.rotate(
                             angle: 3 * pi / 2,
-                            child: MyPlayer(),
+                            child: Player(),
                           );
-                          break;
                         case "down":
                           return Transform.rotate(
                             angle: pi / 2,
-                            child: MyPlayer(),
+                            child: Player(),
                           );
-                          break;
                         default:
-                          return MyPlayer();
+                          return Player();
                       }
                     } else if (ghost == index) {
-                      return MyGhost();
+                      return Ghost(1);
                     } else if (ghost2 == index) {
-                      return MyGhost2();
+                      return Ghost(2);
                     } else if (ghost3 == index) {
-                      return MyGhost3();
+                      return Ghost(3);
                     } else if (barriers.contains(index)) {
-                      return MyPixel(
+                      return Pixel(
                         innerColor: Colors.blue[900],
                         outerColor: Colors.blue[800],
                         // child: Text(index.toString()),
                       );
                     } else if (preGame || food.contains(index)) {
-                      return MyPath(
+                      return Path(
                         innerColor: Colors.yellow,
                         outerColor: Colors.black,
                         // child: Text(index.toString()),
                       );
                     } else {
-                      return MyPath(
+                      return Path(
                         innerColor: Colors.black,
                         outerColor: Colors.black,
                       );
@@ -770,7 +770,7 @@ class _HomePageState extends State<HomePage> {
                           {
                             paused = true,
                             advancedPlayer.pause(),
-                            audioPaused.loop('pacman_intermission.wav'),
+                            audioPaused.loop('audio/pacman_intermission.wav'),
                           }
                         else
                           {
@@ -796,7 +796,7 @@ class _HomePageState extends State<HomePage> {
                           {
                             paused = true,
                             advancedPlayer.pause(),
-                            audioPaused.loop('pacman_intermission.wav'),
+                            audioPaused.loop('audio/pacman_intermission.wav'),
                           },
                       },
                     ),
